@@ -53,6 +53,22 @@
 				"header": []
 			},
 			"response": []
+		},
+		{
+			"name": "eureka",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "product-service cricuit breaker actuator",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }
