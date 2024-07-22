@@ -39,8 +39,6 @@ logging:
 
 eureka:
   client:
-    registerWithEureka: false
-    fetchRegistry: false
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://registry-service:8761/eureka}
   instance:

@@ -41,8 +41,6 @@ management:
 
 eureka:
   client:
-    registerWithEureka: false
-    fetchRegistry: false
     enabled: true
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}

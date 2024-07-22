@@ -19,8 +19,6 @@ spring:
           timeout: 10 #HTTP connection timeout (in seconds)
 eureka:
   client:
-    registerWithEureka: false
-    fetchRegistry: false
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
   instance:
