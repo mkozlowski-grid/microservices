@@ -1,8 +1,6 @@
 spring:
   application:
     name: product-service
-  profiles:
-    active: dev
   config: # optional keyword down here makes this service can start without having available config server
     import: optional:configserver:http://root:s3cr3t@localhost:8888?fail-fast=true&max-attempts=10&max-interval=1500&multiplier=1.2&initial-interval=1100
   cloud:
@@ -43,6 +41,8 @@ management:
 
 eureka:
   client:
+    registerWithEureka: false
+    fetchRegistry: false
     enabled: true
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}

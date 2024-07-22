@@ -1,0 +1,30 @@
+server:
+  port: 8888
+
+spring:
+  security:
+    user:
+      name: root
+      password: s3cr3t
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          clone-on-start: 'true'
+          uri: https://github.com/mkozlowski-grid/config-repo.git
+          force-pull: true # pull the latest code from GIT in case the local repo has some issues and couldn't able to update the repo
+          skipSslValidation: true # Git Server SSL validation can be disabled
+          timeout: 10 #HTTP connection timeout (in seconds)
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+
+
+

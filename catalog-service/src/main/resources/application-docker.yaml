@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: catalog-service
+  config:
+    import: optional:configserver:http://root:s3cr3t@config-server:8888?fail-fast=true&max-attempts=10&max-interval=1500&multiplier=1.2&initial-interval=1100
+
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    enabled: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://registry-service:8761/eureka}
+  instance:
+    preferIpAddress: true
+    hostname: catalog-service

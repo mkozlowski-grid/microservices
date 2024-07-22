@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  config-server:
+    build:
+      context: ./config-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8888:8888"
+    networks:
+      - microservices-network
+
+  registry-service:
+    build:
+      context: ./registry-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8761:8761"
+    depends_on:
+      - config-server
+    networks:
+      - microservices-network
+
+  catalog-service:
+    build:
+      context: ./catalog-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8083:8083"
+    depends_on:
+      - config-server
+      - registry-service
+    networks:
+      - microservices-network
+
+  inventory-service:
+    build:
+      context: ./inventory-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8085:8085"
+    depends_on:
+      - config-server
+      - registry-service
+    networks:
+      - microservices-network
+
+  product-service:
+    build:
+      context: ./product-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8086:8086"
+    depends_on:
+      - config-server
+      - registry-service
+      - inventory-service
+      - catalog-service
+    networks:
+      - microservices-network
+
+  gateway-service:
+    build:
+      context: ./gateway-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8080:8080"
+    depends_on:
+      - config-server
+      - registry-service
+      - product-service
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge
+
