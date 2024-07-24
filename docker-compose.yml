@@ -10,6 +10,8 @@ services:
       - "8888:8888"
     networks:
       - microservices-network
+    depends_on:
+      - registry-service
 
   registry-service:
     build:
@@ -18,8 +20,6 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
       - "8761:8761"
-    depends_on:
-      - config-server
     networks:
       - microservices-network
 
@@ -59,8 +59,8 @@ services:
     depends_on:
       - config-server
       - registry-service
-      - inventory-service
       - catalog-service
+      - inventory-service
     networks:
       - microservices-network
 
@@ -74,6 +74,8 @@ services:
     depends_on:
       - config-server
       - registry-service
+      - catalog-service
+      - inventory-service
       - product-service
     networks:
       - microservices-network
@@ -81,4 +83,5 @@ services:
 networks:
   microservices-network:
     driver: bridge
+
 

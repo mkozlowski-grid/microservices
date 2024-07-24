@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 
-@FeignClient(name = "CATALOG-SERVICE", url = "http://localhost:8083/catalog-service", fallbackFactory = CatalogClientFallbackFactory.class)
+@FeignClient(name = "catalog-service", url = "http://catalog-service:8083/catalog-service", fallbackFactory = CatalogClientFallbackFactory.class)
 public interface CatalogClient {
     @GetMapping(value = "/id/{uniq_id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     Product findByUniqId(@PathVariable("uniq_id") String uniqId);

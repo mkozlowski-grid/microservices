@@ -4,7 +4,6 @@ COPY pom.xml .
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 COPY --from=build /app/target/product-service.jar ./product-service.jar
